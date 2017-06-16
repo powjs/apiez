@@ -1,0 +1,24 @@
+{
+  "name": "apiez",
+  "version": "0.1.0",
+  "description": "An API documentation generator for JavaScript.",
+  "main": "index.js",
+  "bin": {
+    "apiez": "index.js"
+  },
+  "scripts": {
+    "test": "node tests.js",
+  },
+  "repository": "git+https://github.com/powjs/apiez.git",
+  "keywords": [
+    "documentation",
+    "doc",
+    "cli"
+  ],
+  "author": "YU HengChun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/powjs/apiez/issues"
+  },
+  "homepage": "https://github.com/powjs/apiez",
+}
