@@ -15,22 +15,6 @@ module.exports = function apiez(FunctionOrObject, formatter) {
     return doc
 }
 
-if (module === require.main) {
-
-    if (process.argv.length == 2) {
-        console.log('Usage:\n\n  apiez package [formatter]')
-        process.exit(0)
-    }
-
-    try {
-        console.log(module.exports(require(process.argv[2]), format))
-    } catch (e) {
-        console.error(e)
-        process.exit(1)
-    }
-    process.exit(0)
-}
-
 function format(doc) {
     return JSON.stringify(doc, null, '    ')
 }

@@ -1,10 +1,10 @@
 {
   "name": "apiez",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An API documentation generator for JavaScript.",
   "main": "index.js",
   "bin": {
-    "apiez": "index.js"
+    "apiez": "cli.js"
   },
   "scripts": {
     "test": "node test.js"
