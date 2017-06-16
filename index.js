@@ -56,8 +56,15 @@ function func(x, doc) {
 function setDoc(x, doc) {
     var code = x.toString(),
         match = code.match(/^function.+\(([^\)]*)\)\s*{/);
-    doc.args = genArgs((match[1] || '').split(/,|\n\r|\n|\r/)) || null
-    doc.doc = genDoc(code.slice(match[0].length).trimLeft())
+    var d = genArgs((match[1] || '').split(/,|\n\r|\n|\r/)) || null
+
+    if (d)
+        doc.args = d
+
+    code = genDoc(code.slice(match[0].length).trimLeft())
+
+    if (code)
+        doc.doc = doc
 }
 
 function genArgs(args) {
