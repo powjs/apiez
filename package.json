@@ -7,7 +7,7 @@
     "apiez": "index.js"
   },
   "scripts": {
-    "test": "node tests.js",
+    "test": "node test.js"
   },
   "repository": "git+https://github.com/powjs/apiez.git",
   "keywords": [
