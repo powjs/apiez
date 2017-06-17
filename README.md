@@ -60,12 +60,12 @@ function test(x, s) {
 	assert.equal(apiez(x, JSON.stringify), s)
 }
 
-test(A, '{"A":{"args":null,"doc":null,"methods":{' +
+test(A, '{"A":{"methods":{' +
 	'"a":{"args":["a /**/"],"doc":["a",""," b"]},' +
 	'"b":{"args":["a /**/"],"doc":["a",""," b"]}' +
 	'}}}')
 
-test({ B: A }, '{"B":{"args":null,"doc":null,"methods":{' +
+test({ B: A }, '{"B":{"methods":{' +
 	'"a":{"args":["a /**/"],"doc":["a",""," b"]},' +
 	'"b":{"args":["a /**/"],"doc":["a",""," b"]}' +
 	'}}}')

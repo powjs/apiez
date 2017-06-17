@@ -61,10 +61,10 @@ function setDoc(x, doc) {
     if (d)
         doc.args = d
 
-    code = genDoc(code.slice(match[0].length).trimLeft())
+    d = genDoc(code.slice(match[0].length).trimLeft())
 
-    if (code)
-        doc.doc = doc
+    if (d)
+        doc.doc = d
 }
 
 function genArgs(args) {
