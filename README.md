@@ -60,6 +60,11 @@ function test(x, s) {
 	assert.equal(apiez(x, JSON.stringify), s)
 }
 
+test(function a(/*ignore*/ a , /*c,*/ /*ignore*/ b /*,c
+	c*/ , /*ignore*/ c /*c*/ ) {
+
+}, '{"a":{"args":[["a","c,"],["b",",c","c"],["c","c"]]}}')
+
 test(A, '{"A":{"methods":{' +
 	'"a":{"args":["a /**/"],"doc":["a",""," b"]},' +
 	'"b":{"args":["a /**/"],"doc":["a",""," b"]}' +

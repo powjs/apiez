@@ -55,8 +55,8 @@ function func(x, doc) {
 
 function setDoc(x, doc) {
     var code = x.toString(),
-        match = code.match(/^function.+\(([^\)]*)\)\s*{/);
-    var d = genArgs((match[1] || '').split(/,|\n\r|\n|\r/)) || null
+        match = code.match(/^function[^(]*\(([^)]*)\)[^{]*\{/);
+    var d = genArgs((match[1] || '')) || null
 
     if (d)
         doc.args = d
@@ -67,13 +67,59 @@ function setDoc(x, doc) {
         doc.doc = d
 }
 
-function genArgs(args) {
-    args = args.map(function(s) {
-        s = s.trim()
-        return !s.startsWith('/*') && s || null
-    }).filter(function(s) {
-        return !!s
-    })
+function genArgs(code) {
+    var i = 0,
+        a = '',
+        c = '',
+        args = [];
+
+    while (code.length) {
+        i = code.search(/,|\/\*/)
+
+        if (i == -1) {
+            a = code.trim()
+            if (a) args.push(a)
+            break
+        }
+
+        a = code.substring(0, i).trim()
+        c = code[i]
+        code = code.slice(i + (c == ',' && 1 || 2)).trim()
+
+        if (c == ',') {
+            // (a , /*c,*/ b)
+            if (!code.startsWith('/*')) {
+                if (a) args.push(a)
+                continue
+            }
+            code = code.slice(2).trim()
+        }
+
+        i = code.indexOf('*/')
+        c = code.substring(0, i)
+            .replace(/^\*+/, '')
+            .replace(/\*+\*$/, '')
+            .trim()
+
+        code = code.slice(i + 2).trim()
+        if (a.endsWith(','))
+            a = a.slice(0, -1)
+        else if (code && code[0] == ',')
+            code = code.slice(1)
+
+        if (!a) continue
+
+        if (!c)
+            args.push(a)
+        else if (-1 == c.search(/\n\r|\n|\r/))
+            args.push([a, c])
+        else
+            args.push([a].concat(c.split(/\n\r|\n|\r/).map(function(s) {
+                return s.trim()
+            }).filter(function(s) {
+                return !!s
+            })))
+    }
     return args.length && args || null
 }
 
