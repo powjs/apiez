@@ -1,6 +1,6 @@
 {
   "name": "apiez",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "description": "An API documentation generator for JavaScript.",
   "main": "index.js",
   "bin": {

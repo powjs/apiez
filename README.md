@@ -1,10 +1,8 @@
 # apiez
 
-Easily generate API documentation for javascript from runtime instead of source.
+Easily generate API documentation at runtime, rather than from the source code.
 
-Contract:
-
-	The document is a continuous comment at the top of the function body
+Results details to see [test](./test.js) and [test-class](./test-class.js)
 
 ## Install
 
@@ -15,65 +13,50 @@ $ npm install apiez
 ## Useage
 
 ```js
-var apidoc = require('apiez');
+var apiez = require('apiez');
 
-apidoc(require('buffer'))
+apiez(apiez)
 ```
 
 cli
 
 ```shell
-$ apiez buffer
+$ apiez apiez
 ```
 
-## Example
+output
 
-```js
-var apiez = require('apiez'),
-	assert = require('assert');
+```
+apiez
+    params
+        funcInside
+            a function or object
+        results
+            default Object.create(null)
+            object as
 
-function A() {
-	/*A*/
-}
+            {
+            	name:{
+            		params:[["paramN","doc"...]...],
+            		notes:["doc"...]
+            	}
+            }
+    notes
+        Generate API documentation object for funcInside.
 
-A.prototype.a = function(a /**/ ) {
-	/*
-	 a
+        Contract:
 
-	  b
-	*/
+            The summary is a continuous comment at the top of the function body
+            Anonymous functions named ""
 
-	// After the blank line is not a document
-}
+        Feature:
 
-A.prototype.b = function a(a /**/ ) {
-	//
-	// a
-	//
-	//  b
-	//
-
-	// After the blank line is not a document
-}
-
-function test(x, s) {
-	assert.equal(apiez(x, JSON.stringify), s)
-}
-
-test(function a(/*ignore*/ a , /*c,*/ /*ignore*/ b /*,c
-	c*/ , /*ignore*/ c /*c*/ ) {
-
-}, '{"a":{"args":[["a","c,"],["b",",c","c"],["c","c"]]}}')
-
-test(A, '{"A":{"methods":{' +
-	'"a":{"args":["a"],"doc":["a",""," b"]},' +
-	'"b":{"args":["a"],"doc":["a",""," b"]}' +
-	'}}}')
-
-test({ B: A }, '{"B":{"methods":{' +
-	'"a":{"args":["a"],"doc":["a",""," b"]},' +
-	'"b":{"args":["a"],"doc":["a",""," b"]}' +
-	'}}}')
+            Parameter Comment
+            Prototype methods
+            Extends class
+            Constructor, if it is first method
+            Remove head and tail empty lines
+            Remove the same indent white-spaces
 ```
 
 # License
